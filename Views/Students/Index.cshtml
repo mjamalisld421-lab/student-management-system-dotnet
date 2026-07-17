@@ -1,0 +1,16 @@
+@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "Students";
+}
+<div class="page-heading"><div><p class="eyebrow">Directory</p><h1>Students</h1><p class="text-muted">Manage student records and academic status.</p></div><a class="btn btn-primary" asp-action="Create">+ Add student</a></div>
+<form method="get" class="filter-bar">
+    <input class="form-control" type="search" name="search" value="@ViewBag.Search" placeholder="Search name, email, or department" />
+    <select class="form-select" name="status" asp-items="Html.GetEnumSelectList<StudentStatus>()"><option value="">All statuses</option></select>
+    <button class="btn btn-dark">Search</button>
+    <a class="btn btn-light" asp-action="Index">Reset</a>
+</form>
+<div class="panel table-responsive">
+@if (!Model.Any()) { <partial name="_EmptyState" model="@("No students match your filters.")" /> }
+else { <table class="table align-middle mb-0"><thead><tr><th>Student</th><th>Department</th><th>Enrolled</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
+<tbody>@foreach (var item in Model) { <tr><td><a class="entity-link" asp-action="Details" asp-route-id="@item.Id">@item.FullName</a><div class="small text-muted">@item.Email</div></td><td>@item.Department</td><td>@item.EnrollmentDate.ToString("MMM d, yyyy")</td><td><span class="status status-@item.Status.ToString().ToLower()">@item.Status</span></td><td class="text-end action-links"><a asp-action="Edit" asp-route-id="@item.Id">Edit</a><a class="text-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td></tr>}</tbody></table>}
+</div>

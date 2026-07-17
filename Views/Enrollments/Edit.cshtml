@@ -1,0 +1,3 @@
+@model Enrollment
+@{ ViewData["Title"]="Edit enrollment"; }
+<div class="form-shell"><a class="back-link" asp-action="Index">← Enrollments</a><h1>Edit enrollment</h1><p class="text-muted">Update registration or assign a grade.</p><form method="post" class="panel form-panel"><input type="hidden" asp-for="Id"/><partial name="_Form" model="Model"/><div class="form-actions"><a class="btn btn-light" asp-action="Index">Cancel</a><button class="btn btn-primary">Save changes</button></div></form></div>
