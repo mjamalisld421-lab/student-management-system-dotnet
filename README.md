@@ -2,6 +2,8 @@
 
 A professional ASP.NET Core MVC application for managing students, courses, enrollments, and grades. CampusCore is intentionally scoped as a focused Version 1 portfolio project: it demonstrates practical C#, MVC, Entity Framework Core, relational data modeling, validation, and responsive UI work without placeholder features or unnecessary infrastructure.
 
+**Live demo:** [https://jamal-student-management.runasp.net/](https://jamal-student-management.runasp.net/)
+
 ## Features
 
 - Dashboard with student, course, enrollment, and GPA summary cards
@@ -21,7 +23,8 @@ A professional ASP.NET Core MVC application for managing students, courses, enro
 - .NET 8 / ASP.NET Core MVC
 - C#
 - Entity Framework Core 8
-- SQLite
+- SQLite for local development
+- Microsoft SQL Server for the hosted production demo
 - Razor views
 - Bootstrap 5 with custom CSS
 
@@ -90,7 +93,11 @@ The local `studentmanagement.db` file is ignored by Git. Delete it and run `dotn
 
 ## Deployment notes
 
-This repository is configured for local SQLite development. For production, use environment-based connection strings, select a production-supported database provider, apply migrations through the release process, enable HTTPS, and add appropriate authentication/authorization. No production deployment is claimed by this project.
+The live demo runs on MonsterASP.NET Free Hosting in its EU datacenter using .NET 8 and a free MSSQL database. Local development continues to use SQLite by default. The production application selects SQL Server through environment variables, applies the SQL Server EF Core migration during startup, and stores its hosted connection string only in the hosting dashboard.
+
+The application was deployed from the release ZIP prepared from the `deploy/free-dotnet-hosting` branch. HTTPS is active through a free automatically renewed Let's Encrypt certificate, and HTTP requests are redirected to HTTPS.
+
+MonsterASP.NET's free tier is suitable for a portfolio/demo workload rather than guaranteed production service. The current limits include 5 GB of website storage, 256 MB of dedicated application RAM, 1 GB of database storage, limited traffic, no automatic backup guarantee, no uptime guarantee, and possible archival after six months of inactivity.
 
 ## Future improvements
 
@@ -104,7 +111,8 @@ This repository is configured for local SQLite development. For production, use 
 ## Limitations
 
 - Version 1 intentionally has no authentication or authorization.
-- SQLite and in-process seed logic are aimed at local/demo use.
+- SQLite is used for local development; the hosted demo uses MSSQL with synthetic seed data.
+- Free hosting has limited traffic and resources, no automatic backup guarantee, and no uptime guarantee.
 - GPA uses a simple A=4, B=3, C=2, D=1, F=0 average and excludes in-progress enrollments; it is not credit-weighted.
 - Search uses straightforward database string matching.
 - Course/student deletion cascades to related enrollments after an explicit confirmation page.

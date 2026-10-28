@@ -4,8 +4,9 @@ obj/
 *.db-shm
 *.db-wal
 .vs/
-.vscode/
 *.user
 *.suo
 work/
 App_Data/DataProtection-Keys/
+config.bat
+node_modules
