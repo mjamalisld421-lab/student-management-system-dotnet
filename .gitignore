@@ -7,3 +7,5 @@ obj/
 .vscode/
 *.user
 *.suo
+work/
+App_Data/DataProtection-Keys/

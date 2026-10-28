@@ -3,7 +3,7 @@ using StudentManagementSystem.Models;
 
 namespace StudentManagementSystem.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Student> Students => Set<Student>();
     public DbSet<Course> Courses => Set<Course>();
@@ -22,3 +22,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
+
+public sealed class SqlServerAppDbContext(DbContextOptions<SqlServerAppDbContext> options)
+    : AppDbContext(options);
